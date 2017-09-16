@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<package name="afficheList" namespace="/" extends="struts-default">
+<interceptors><interceptor name="loginInterceptor" class="com.controller.LoginInterceptor" >
+</interceptor></interceptors>
+<global-results>
+<result name="usersLogin">
+/affiche/login/login.jsp
+</result>
+</global-results>
+
+	<action name="afficheListAction" class="com.controller.AfficheListAction" method="afficheList">
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="loginInterceptor"/>
+	<result name="afficheList">
+		/affiche/afficheList.jsp
+	</result>
+</action>
+<action name="searchByTopicAction" class="com.controller.SearchByTopicAction" method="searchByTopic">
+	<result name="searchByTopic">
+		/affiche/afficheList.jsp
+	</result>
+</action>
+
+<action name="deleteSelectedAction" class="com.controller.DeleteSelectedAction" method="deleteSelected">
+	<result name="deleteSelected" type="chain">
+		afficheListAction
+	</result>
+</action>
+
+<action name="loadSaveAfficheAction" class="com.controller.LoadSaveAfficheAction" method="loadAffiche">
+	<result name="loadAffiche" >
+		/affiche/saveAffiche.jsp
+	</result>
+</action>
+
+<action name="saveAfficheAction" class="com.controller.SaveAfficheAction" method="saveAffiche">
+	<result name="saveAffiche" type="chain">
+		afficheListAction
+	</result>
+</action>
+
+	<action name="deleteListAction" class="com.controller.DeleteListAction" method="afficheList">
+	<result name="afficheList">
+		/affiche/delete_affiche.jsp
+	</result>
+</action>
+
+	<action name="deleteAfficheAction" class="com.controller.DeleteAfficheAction" method="deleteAffiche">
+	<result name="deleteAffiche" type="chain">
+		deleteListAction
+	</result>
+</action>
+
+<action name="searchByTopicDAction" class="com.controller.SearchByTopicAction" method="searchByTopicD">
+	<result name="searchByTopicD">
+		/affiche/delete_affiche.jsp
+	</result>
+</action>
+
+<action name="searchByTopicUAction" class="com.controller.SearchByTopicAction" method="searchByTopicU">
+	<result name="searchByTopicU">
+		/affiche/update_affiche.jsp
+	</result>
+</action>
+
+	<action name="loadUpdateListAction" class="com.controller.LoadUpdateListAction" method="loadUpdateList">
+	<result name="afficheList">
+		/affiche/update_affiche.jsp
+	</result>
+</action>
+
+<action name="modifyAfficheAction" class="com.controller.ModifyAfficheAction" method="modifyAffiche">
+	<result name="modifyAffiche" >
+		/affiche/modify.jsp
+	</result>
+</action>
+
+<action name="updateAfficheAction" class="com.controller.UpdateAfficheAction" method="updateAffiche">
+	<result name="updateAffiche"  type="chain">
+		loadUpdateListAction
+	</result>
+</action>
+<action name="affichePagingAction" class="com.controller.AffichePagingAction" method="affichePaging">
+	<result name="affichePaging">
+		/affiche/affichePaging.jsp
+	</result>
+</action>
+</package>
+</struts>    
